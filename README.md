@@ -1,14 +1,15 @@
-## Heroku buildpack: Erlang
+# Buildpack: Erlang
 
-This is a Heroku buildpack for Erlang apps. It uses [Rebar](https://github.com/basho/rebar).
+This is a [buildpack](http://doc.scalingo.com/buildpacks) for Erlang apps.
+It uses [Rebar](https://github.com/basho/rebar).
 
+### Configure your Scalingo App
 
-### Configure your Heroku App
+```sh-session
+$ scalingo create erlang-app
+```
 
-    $ heroku config:add BUILDPACK_URL="https://github.com/archaelus/heroku-buildpack-erlang.git" -a YOUR_APP
-
-or
-    $ heroku create --buildpack "https://github.com/archaelus/heroku-buildpack-erlang.git"
+Nothing else.
 
 ### Select an Erlang version
 
@@ -18,21 +19,21 @@ Currently supported OTP versions:
 
 * master (R17B pre)
 * master-pu (R16B pre)
-* OTP_R15B
-* OTP_R15B01
-* OTP_R15B02
-* OTP_R16B
-* OTP_R16B01
-* OTP_R16B02
-* OTP_R16B03
+* `OTP_R15B`
+* `OTP_R15B01`
+* `OTP_R15B02`
+* `OTP_R16B`
+* `OTP_R16B01`
+* `OTP_R16B02`
+* `OTP_R16B03`
 
 To select the version for your app:
 
     $ echo OTP_R15B01 > .preferred_otp_version
     $ git commit -m "Select R15B01 as preferred OTP version" .preferred_otp_version
 
-### Build your Heroku App
+### Build your Scalingo App
 
-    $ git push heroku master
+    $ git push scalingo master
 
 You may need to write a new commit and push if your code was already up to date.
