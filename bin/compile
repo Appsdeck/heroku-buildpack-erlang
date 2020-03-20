@@ -5,7 +5,7 @@
 
 
 # export variables in <env-dir>
-# see https://devcenter.heroku.com/articles/buildpack-api#bin-compile
+# see https://doc.scalingo.com/platform/deployment/buildpacks/custom#architecture-of-a-buildpack
 
 env_dir=$3
 if [ -d "$env_dir" ]; then
