@@ -1,6 +1,6 @@
 # Buildpack: Erlang
 
-This is a [buildpack](http://doc.scalingo.com/buildpacks) for Erlang apps. It
+This is a [buildpack](https://doc.scalingo.com/buildpacks) for Erlang apps. It
 uses [Rebar](https://github.com/basho/rebar) or
 [Rebar3](https://github.com/rebar/rebar3).
 
@@ -19,7 +19,7 @@ Nothing else.
 
 The Erlang/OTP release version that will be used to build and run your
 application is now sourced from a dotfile called `.preferred_otp_version`. It
-needs to be the branch or tag name from the http://github.com/erlang/otp
+needs to be the branch or tag name from the https://github.com/erlang/otp
 repository, and further, needs to be one of the versions that precompiled
 binaries are available for.
 
