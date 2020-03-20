@@ -30,7 +30,7 @@ Currently supported OTP versions:
 
 scalingo-14:
 
-* OTP-20.1 *
+* OTP-19.1 *
 
 scalingo-18:
 
