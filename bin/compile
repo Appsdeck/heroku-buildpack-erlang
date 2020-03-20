@@ -92,7 +92,6 @@ if [ $BINARY_RELEASES ]; then
     fi
     echo "-----> Install succeeded"
 else
-    OTP_BASE_URL="https://s3.amazonaws.com/heroku-buildpack-erlang"
     case $STACK in
         scalingo-14)
             echo "-----> Stack is scalingo-14"
@@ -101,8 +100,6 @@ else
                 OTP_VERSION=$(cat ${build}/.preferred_otp_version)
             fi
             ver=${OTP_VERSION:=${DEFAULT_OTP_VERSION}}
-            tarball="${ver}_cedar-14.tgz"
-            location="runtimes"
             ;;
         scalingo-18)
             echo "-----> Stack is scalingo-18"
@@ -111,16 +108,14 @@ else
                 OTP_VERSION=$(cat ${build}/.preferred_otp_version)
             fi
             ver=${OTP_VERSION:=${DEFAULT_OTP_VERSION}}
-            tarball="${ver}.tgz"
-            location="heroku/heroku-18"
-            OTP_BASE_URL="https://svn.marco-gatti.com"
             ;;
         *)
             echo "-----> Sorry, stack $STACK is not available"
             exit 1
             ;;
     esac
-    OTP_TARBALL_URL="${OTP_BASE_URL}/${location}/${tarball}"
+    OTP_BASE_URL="https://buildpacks-repository.s3.eu-central-1.amazonaws.com/erlang"
+    OTP_TARBALL_URL="${OTP_BASE_URL}/${STACK}/${ver}.tgz"
     ERLROOT=${build}/otp
     PROFILE=${HOME}/.profile.d
 
