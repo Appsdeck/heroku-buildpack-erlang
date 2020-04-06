@@ -7,6 +7,8 @@
 # export variables in <env-dir>
 # see https://doc.scalingo.com/platform/deployment/buildpacks/custom#architecture-of-a-buildpack
 
+[ "x$DEBUG" = "xtrue" ] && set -x
+
 env_dir=$3
 if [ -d "$env_dir" ]; then
   for e in $(ls $env_dir); do
@@ -96,24 +98,21 @@ else
         scalingo-14)
             echo "-----> Stack is scalingo-14"
             DEFAULT_OTP_VERSION="OTP-19.1"
-            if [ -f ${build}/.preferred_otp_version ]; then
-                OTP_VERSION=$(cat ${build}/.preferred_otp_version)
-            fi
-            ver=${OTP_VERSION:=${DEFAULT_OTP_VERSION}}
             ;;
         scalingo-18)
             echo "-----> Stack is scalingo-18"
             DEFAULT_OTP_VERSION="OTP-22.2.7"
-            if [ -f ${build}/.preferred_otp_version ]; then
-                OTP_VERSION=$(cat ${build}/.preferred_otp_version)
-            fi
-            ver=${OTP_VERSION:=${DEFAULT_OTP_VERSION}}
             ;;
         *)
             echo "-----> Sorry, stack $STACK is not available"
             exit 1
             ;;
     esac
+    if [ -f ${build}/.preferred_otp_version ]; then
+        OTP_VERSION=$(cat ${build}/.preferred_otp_version)
+    fi
+    ver=${OTP_VERSION:=${DEFAULT_OTP_VERSION}}
+    tarball="${ver}.tgz"
     OTP_BASE_URL="https://buildpacks-repository.s3.eu-central-1.amazonaws.com/erlang"
     OTP_TARBALL_URL="${OTP_BASE_URL}/${STACK}/${ver}.tgz"
     ERLROOT=${build}/otp
@@ -133,7 +132,7 @@ else
         curl -sSO ${OTP_TARBALL_URL}
 
         echo "-------> Finished fetching tarball, checking"
-        file ${tarball} | grep -ql gzip
+        file ${tarball} | grep --quiet --files-with-matches gzip
 
     )
 
