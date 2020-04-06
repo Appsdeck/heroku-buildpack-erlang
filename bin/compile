@@ -7,6 +7,8 @@
 # export variables in <env-dir>
 # see https://doc.scalingo.com/platform/deployment/buildpacks/custom#architecture-of-a-buildpack
 
+[ "x$DEBUG" = "xtrue" ] && set -x
+
 env_dir=$3
 if [ -d "$env_dir" ]; then
   for e in $(ls $env_dir); do
