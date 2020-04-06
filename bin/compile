@@ -135,7 +135,7 @@ else
         curl -sSO ${OTP_TARBALL_URL}
 
         echo "-------> Finished fetching tarball, checking"
-        file ${tarball} | grep -ql gzip
+        file ${tarball} | grep --quiet gzip
 
     )
 
