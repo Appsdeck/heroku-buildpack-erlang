@@ -132,8 +132,10 @@ else
         curl -sSO ${OTP_TARBALL_URL}
 
         echo "-------> Finished fetching tarball, checking"
-        file ${tarball} | grep --quiet --files-with-matches gzip
 
+        set +e
+        file ${tarball} | grep --quiet --files-with-matches gzip
+        [[ $? -ne 0 ]] && echo "Failed to download the specified OTP version ($ver)" >&2 && exit -1
     )
 
     echo "-------> Unpacking Erlang/OTP $ver"
