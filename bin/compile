@@ -104,7 +104,7 @@ else
             DEFAULT_OTP_VERSION="OTP-22.2.7"
             ;;
         *)
-            echo "-----> Sorry, stack $STACK is not available"
+            echo "-----> Sorry, stack $STACK is not supported by this buildpack yet. Please contact Scalingo support."
             exit 1
             ;;
     esac
