@@ -104,7 +104,7 @@ else
             DEFAULT_OTP_VERSION="OTP-22.2.7"
             ;;
         *)
-            echo "-----> Sorry, stack $STACK is not available"
+            echo "-----> Sorry, stack $STACK is not supported by this buildpack yet. Please contact Scalingo support."
             exit 1
             ;;
     esac
@@ -136,6 +136,8 @@ else
         set +e
         file ${tarball} | grep --quiet --files-with-matches gzip
         [[ $? -ne 0 ]] && echo "Failed to download the specified OTP version ($ver)" >&2 && exit -1
+
+        exit 0
     )
 
     echo "-------> Unpacking Erlang/OTP $ver"
